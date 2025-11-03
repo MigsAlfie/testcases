@@ -15,7 +15,7 @@
 /* Table button alignment */
 .table td .btn {
   margin-left: 6px;
-  text-decoration: none; /* remove underline */
+  text-decoration: none;
   display: inline-block;
 }
 

@@ -40,7 +40,7 @@
 /* Hover effect for all buttons */
 .btn {
   transition: all 0.25s ease-in-out;
-  text-decoration: none; /* remove underline for links like Back */
+  text-decoration: none;
 }
 
 .btn:hover {

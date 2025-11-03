@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -50,6 +51,12 @@ public class DashboardController {
         model.addAttribute("runsSkipped", skipped);
         model.addAttribute("totalCases", totalCases);
         model.addAttribute("lastRun", lastRun);
+
+        // Human-friendly last run date, e.g., "November 3, 2025 at 22:55"
+        if (lastRun != null) {
+            DateTimeFormatter fmt = DateTimeFormatter.ofPattern("MMMM d, yyyy 'at' HH:mm");
+            model.addAttribute("lastRunFormatted", lastRun.format(fmt));
+        }
 
         // Passed/Failed ratio as string "P : F"
         String ratio = String.format("%d : %d", passed, failed);

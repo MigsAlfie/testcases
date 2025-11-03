@@ -53,7 +53,7 @@
       <div class="card">
         <div class="h1">Last run date</div>
         <div class="stat mt-12">
-          <div class="value">${(lastRun)!"—"}</div>
+          <div class="value">${(lastRunFormatted)!"—"}</div>
           <div class="label">Most recent Test Run</div>
         </div>
       </div>
