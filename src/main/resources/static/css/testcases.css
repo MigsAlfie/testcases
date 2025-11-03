@@ -42,7 +42,14 @@
 .grid.cols-2 {
   grid-template-columns: 62% 34%;
   align-items: start;
+  gap: 24px;
 }
+
+/* Nudge the left table slightly down for visual alignment */
+.grid.cols-2 > div:first-child {
+  margin-top: 7.45px;
+}
+
 
 /* Center layout cleaner */
 .card {
