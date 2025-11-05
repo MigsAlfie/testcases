@@ -15,9 +15,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/dashboard")
-public class DashboardController { // for example here just pass the (HttpSession session)
-
-    // and just create conditional statements to check the users sesson
+public class DashboardController {
 
     private final TestCaseService caseService;
     private final TestRunService runService;
