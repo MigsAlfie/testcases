@@ -56,9 +56,6 @@
           data-expected="${(tc.expectedResults!"")?replace('\r\n','\n')?replace('\n','\\n')}">
     <img src="/images/edit_button.png" alt="Edit" class="icon edit-icon">
   </button>
-  <a href="/testcases/delete/${tc.id}" class="icon-btn">
-    <img src="/images/delete_button.png" alt="Delete" class="icon delete-icon">
-  </a>
   <button type="button" class="icon-btn info-btn"
     data-id="${tc.id}"
     data-module="${tc.module!""}"
@@ -68,6 +65,10 @@
     data-expected="${(tc.expectedResults!"")?replace('\r\n','\n')?replace('\n','\\n')}">
     <img src="/images/duplicate-24.svg" alt="duplicate" class="icon info-icon">
   </button>
+  <a href="/testcases/delete/${tc.id}" class="icon-btn">
+    <img src="/images/delete_button.png" alt="Delete" class="icon delete-icon">
+  </a>
+  
 </div>
 
               </td>
