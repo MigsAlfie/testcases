@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/testruns")
 public class TestRunController {
@@ -20,20 +22,42 @@ public class TestRunController {
     }
 
     @GetMapping
-    public String list(Model model) {
-        model.addAttribute("testruns", runService.findAll());
+    public String list(@RequestParam(required = false) Long selectedTestCase,
+                      @RequestParam(required = false) TestRun.Status selectedStatus,
+                      @RequestParam(required = false) TestRun.Status filterStatus,
+                      Model model) {
+        // Get test runs - filtered or all
+        List<TestRun> testRuns = (filterStatus != null) 
+            ? runService.findByStatus(filterStatus) 
+            : runService.findAll();
+        
+        model.addAttribute("testruns", testRuns);
         model.addAttribute("testcases", caseService.findAll());
         model.addAttribute("statuses", TestRun.Status.values());
+        
+        // Pass selected values to persist dropdown selections
+        model.addAttribute("selectedTestCase", selectedTestCase);
+        model.addAttribute("selectedStatus", selectedStatus != null ? selectedStatus : TestRun.Status.NOT_TESTED);
+        model.addAttribute("filterStatus", filterStatus);
+        
         return "testruns";
     }
 
     @PostMapping
-    public String create(@RequestParam Long testCaseId, @RequestParam TestRun.Status status) {
+    public String create(@RequestParam Long testCaseId, 
+                        @RequestParam TestRun.Status status,
+                        @RequestParam(required = false) TestRun.Status filterStatus) {
         TestRun run = new TestRun();
         TestCase tc = caseService.findById(testCaseId);
         run.setTestCase(tc);
         run.setStatus(status);
         runService.save(run);
-        return "redirect:/testruns";
+        
+        // Redirect with selected values and preserve filter
+        String redirect = "redirect:/testruns?selectedTestCase=" + testCaseId + "&selectedStatus=" + status;
+        if (filterStatus != null) {
+            redirect += "&filterStatus=" + filterStatus;
+        }
+        return redirect;
     }
 }

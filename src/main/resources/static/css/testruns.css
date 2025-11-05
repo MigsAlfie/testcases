@@ -125,3 +125,58 @@
   justify-content: flex-end;
   margin-top: 12px;
 }
+
+/* Add to testruns.css */
+
+/* Make the grid container fill available height */
+.grid.cols-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  height: calc(100vh - 200px); /* Adjust based on your toolbar height */
+  align-items: start;
+}
+
+/* Only make the RIGHT column (second div) scrollable */
+.grid.cols-2 > div:nth-child(2) {
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.5rem;
+  max-height: 100%;
+}
+
+/* Left column stays as-is, no scrolling */
+.grid.cols-2 > div:nth-child(1) {
+  overflow: visible;
+}
+
+/* Style the scrollbar (optional, for better UX) */
+.grid.cols-2 > div:nth-child(2)::-webkit-scrollbar {
+  width: 8px;
+}
+
+.grid.cols-2 > div:nth-child(2)::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.grid.cols-2 > div:nth-child(2)::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.grid.cols-2 > div:nth-child(2)::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Firefox scrollbar styling */
+.grid.cols-2 > div:nth-child(2) {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+
+/* Ensure table is not fixed height */
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+}
