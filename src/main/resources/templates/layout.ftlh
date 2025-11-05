@@ -28,6 +28,7 @@
           <a href="/testcases" class="${(active=="testcases")?then("active","")}">Test Cases</a>
           <a href="/testruns" class="${(active=="testruns")?then("active","")}">Test Runs</a>
           <a href="/testcases/new" class="${(active=="addcase")?then("active","")}">Add Test Case</a>
+          <a href="#" class="${(active=="settings")?then("active","")}">Settings</a>
 
           <a href="/auth/signout/new">Sign Out</a>
         </nav>

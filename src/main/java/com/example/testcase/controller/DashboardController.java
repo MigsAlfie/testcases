@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/dashboard")
 public class DashboardController {
+
     private final TestCaseService caseService;
     private final TestRunService runService;
 
