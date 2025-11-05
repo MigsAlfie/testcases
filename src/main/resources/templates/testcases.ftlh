@@ -66,7 +66,7 @@
     data-description="${tc.description!""}"
     data-steps="${(tc.testSteps!"")?replace('\r\n','\n')?replace('\n','\\n')}"
     data-expected="${(tc.expectedResults!"")?replace('\r\n','\n')?replace('\n','\\n')}">
-    <img src="/images/info_button.png" alt="Info" class="icon info-icon">
+    <img src="/images/duplicate-24.svg" alt="duplicate" class="icon info-icon">
   </button>
 </div>
 
@@ -219,12 +219,42 @@
 
       // Info button click
       document.querySelectorAll('.info-btn').forEach(function(btn){
-        btn.addEventListener('click', function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          renderDetails(dataFrom(btn));
-        });
-      });
+  btn.addEventListener('click', function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    
+    var data = dataFrom(btn);
+    if(!data.id) return;
+    
+    // Confirm duplication
+    if(!confirm('Duplicate "' + data.title + '"?')) return;
+    
+    // Create payload for new test case (without id)
+    var payload = {
+      name: data.title + ' - Copy',
+      module: data.module || '',
+      description: data.description || '',
+      testSteps: decode(data.steps || ''),
+      expectedResults: decode(data.expected || '')
+    };
+    
+    // POST to create new test case
+    fetch('/api/testcases', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function(res){
+      if(!res.ok) throw new Error('Failed to duplicate');
+      return res.json();
+    }).then(function(created){
+      // Reload page to show new test case
+      window.location.reload();
+    }).catch(function(err){
+      alert('Duplication failed. Please try again.');
+      console.error(err);
+    });
+  });
+});
 
       // Edit button click
       document.querySelectorAll('.edit-btn').forEach(function(btn){

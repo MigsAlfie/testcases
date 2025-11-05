@@ -16,6 +16,11 @@ public class TestRunService {
 
     public List<TestRun> findAll() { return repo.findAll(); }
 
+    // ADD THIS METHOD
+    public List<TestRun> findByStatus(TestRun.Status status) { 
+        return repo.findByStatus(status); 
+    }
+
     public TestRun findById(Long id) { return repo.findById(id).orElse(null); }
 
     public TestRun save(TestRun run) { return repo.save(run); }

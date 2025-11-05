@@ -160,3 +160,57 @@
 .search-bar .search-btn.icon-only { display: inline-flex; align-items: center; justify-content: center; padding: 8px 10px; }
 .search-bar .search-btn.icon-only .icon { width: 18px; height: 18px; display: block; }
 
+/* Add to testcases.css */
+
+/* Make the grid container fill available height */
+.grid.cols-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  height: calc(100vh - 200px); /* Adjust based on your toolbar height */
+  align-items: start;
+}
+
+/* Make BOTH columns scrollable independently */
+.grid.cols-2 > div {
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.5rem;
+  max-height: 100%;
+}
+
+/* Style the scrollbar (optional, for better UX) */
+.grid.cols-2 > div::-webkit-scrollbar {
+  width: 8px;
+}
+
+.grid.cols-2 > div::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.grid.cols-2 > div::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.grid.cols-2 > div::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Firefox scrollbar styling */
+.grid.cols-2 > div {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+
+/* Ensure table is not fixed height */
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+/* Details panel styling */
+.details-panel {
+  height: 100%;
+}
